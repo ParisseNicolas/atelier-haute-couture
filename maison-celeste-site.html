@@ -481,24 +481,124 @@
   }
   .notif.show { transform: translateX(0); }
 
+  /* Hamburger */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px; z-index: 101;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 1px; background: var(--blanc);
+    transition: transform .3s, opacity .3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* Menu mobile overlay */
+  .nav-mobile {
+    display: none; position: fixed; inset: 0; z-index: 99;
+    background: rgba(10,10,10,.97); flex-direction: column;
+    align-items: center; justify-content: center; gap: 32px;
+  }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a {
+    color: rgba(255,255,255,.7); text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px; font-weight: 300; font-style: italic;
+    letter-spacing: .05em; transition: color .2s;
+  }
+  .nav-mobile a:hover { color: var(--or); }
+
+  /* QR Code — section contact */
+  .qr-section {
+    margin-top: 64px;
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+  .qr-ornement {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .qr-orn-line {
+    display: block; width: 48px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,169,110,.5));
+  }
+  .qr-ornement .qr-orn-line:last-child {
+    background: linear-gradient(to left, transparent, rgba(201,169,110,.5));
+  }
+  .qr-orn-diamond { font-size: 8px; color: var(--or); opacity: .7; }
+  .qr-eyebrow {
+    font-size: 9px; letter-spacing: .35em; text-transform: uppercase;
+    color: var(--or); font-weight: 400;
+  }
+  .qr-card {
+    position: relative;
+    padding: 20px; background: var(--blanc);
+    display: inline-flex;
+  }
+  .qr-card-corner {
+    position: absolute; width: 14px; height: 14px;
+  }
+  .qr-tl { top: -1px; left: -1px; border-top: 1px solid var(--or); border-left: 1px solid var(--or); }
+  .qr-tr { top: -1px; right: -1px; border-top: 1px solid var(--or); border-right: 1px solid var(--or); }
+  .qr-bl { bottom: -1px; left: -1px; border-bottom: 1px solid var(--or); border-left: 1px solid var(--or); }
+  .qr-br { bottom: -1px; right: -1px; border-bottom: 1px solid var(--or); border-right: 1px solid var(--or); }
+  .qr-card canvas, .qr-card img { display: block; }
+  .qr-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 300; color: rgba(255,255,255,.4);
+    text-align: center; line-height: 1.6;
+  }
+  .qr-caption em { font-style: italic; color: var(--or-fonce); }
+
+  @media (max-width: 1024px) {
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .galerie-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     nav.scrolled { padding: 14px 24px; }
-    section { padding: 80px 24px; }
+    section { padding: 70px 20px; }
     .nav-links { display: none; }
-    #apropos { grid-template-columns: 1fr; }
-    .apropos-visual { max-height: 300px; }
+    .hamburger { display: flex; }
+    #apropos { grid-template-columns: 1fr; gap: 40px; }
+    .apropos-visual { max-height: 280px; }
+    .apropos-stats { gap: 24px; flex-wrap: wrap; }
     .steps-grid { grid-template-columns: 1fr; }
-    .galerie-grid { grid-template-columns: 1fr 1fr; }
+    .galerie-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
     .galerie-item:first-child { grid-row: span 1; }
     .commander-grid { grid-template-columns: 1fr; }
     .order-sidebar { position: static; }
     .form-row { grid-template-columns: 1fr; }
     .mensure-grid { grid-template-columns: 1fr 1fr; }
-    .mensuration-schema { grid-template-columns: 1fr; padding: 40px; }
-    footer { flex-direction: column; text-align: center; }
+    .mensuration-schema { grid-template-columns: 1fr; padding: 32px 20px; gap: 40px; }
+    .schema-svg-wrap { margin: 0 auto; }
+    .devis-options { grid-template-columns: 1fr; }
+    .contact-links { flex-direction: column; align-items: center; gap: 24px; }
+    footer { flex-direction: column; align-items: center; text-align: center; gap: 24px; }
+    .notif { right: 16px; left: 16px; bottom: 20px; }
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
+    .hero-title { font-size: clamp(44px, 14vw, 80px); }
+    .hero-subtitle { font-size: clamp(15px, 4vw, 22px); }
+    .hero-cta { flex-direction: column; align-items: center; gap: 12px; }
+    .btn { padding: 14px 32px; }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 60px 16px; }
+    nav { padding: 18px 16px; }
+    .galerie-grid { grid-template-columns: 1fr; }
+    .mensure-grid { grid-template-columns: 1fr 1fr; }
+    .schema-lines { gap: 12px; }
+    .schema-line { grid-template-columns: 1fr; gap: 4px; }
+    .apropos-stats { gap: 20px; }
+    .stat-num { font-size: 32px; }
+    .mensuration-schema { padding: 24px 16px; }
+    .galerie-tabs { gap: 0; overflow-x: auto; }
+    .tab { padding: 12px 18px; white-space: nowrap; font-size: 9px; }
+    .devis-form { max-width: 100%; }
+    .form-section-title { font-size: 18px; flex-wrap: wrap; }
+    footer { padding: 28px 16px; }
   }
 </style>
 </head>
@@ -517,7 +617,19 @@
     <li><a href="#devis">Devis</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="navMobile">
+  <a href="#apropos" onclick="closeMenu()">L'atelier</a>
+  <a href="#galerie" onclick="closeMenu()">Galerie</a>
+  <a href="#mensurations" onclick="closeMenu()">Mensurations</a>
+  <a href="#commander" onclick="closeMenu()">Commander</a>
+  <a href="#devis" onclick="closeMenu()">Devis</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -979,6 +1091,24 @@
         <span class="contact-link-val">@maisoncéleste</span>
       </a>
     </div>
+
+    <!-- QR Code -->
+    <div class="qr-section">
+      <div class="qr-ornement">
+        <span class="qr-orn-line"></span>
+        <span class="qr-orn-diamond">◆</span>
+        <span class="qr-orn-line"></span>
+      </div>
+      <p class="qr-eyebrow">Accès rapide</p>
+      <div class="qr-card">
+        <div class="qr-card-corner qr-tl"></div>
+        <div class="qr-card-corner qr-tr"></div>
+        <div class="qr-card-corner qr-bl"></div>
+        <div class="qr-card-corner qr-br"></div>
+        <div id="qrcode"></div>
+      </div>
+      <p class="qr-caption">Scannez pour ouvrir le site<br><em>sur votre téléphone</em></p>
+    </div>
   </div>
 </section>
 
@@ -992,6 +1122,8 @@
 <!-- Notification -->
 <div class="notif" id="notif"></div>
 
+<!-- QR Code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
   // Curseur personnalisé
   const cursor = document.getElementById('cursor');
@@ -1009,6 +1141,18 @@
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
   });
+
+  // Menu hamburger
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('navMobile').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('navMobile').classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('navMobile').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
   // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
@@ -1045,6 +1189,17 @@
     setTimeout(() => notif.classList.remove('show'), 4000);
     e.target.reset();
   }
+
+  // QR Code
+  const siteUrl = window.location.href.split('#')[0] || 'https://maison-celeste.fr';
+  new QRCode(document.getElementById('qrcode'), {
+    text: siteUrl,
+    width: 100,
+    height: 100,
+    colorDark: '#0a0a0a',
+    colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.M
+  });
 </script>
 </body>
 </html>
